@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Hearing Test Website</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Background with gradient overlay */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: url('er.jpg') no-repeat center center/cover;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .background-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4));
+            z-index: -1;
+        }
+
+        /* Navbar styling */
+        .navbar {
+            background: rgba(0, 0, 0, 0.85) !important;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar-brand, .nav-link {
+            color: #f8f9fa !important;
+            transition: 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            color: #17a2b8 !important;
+            transform: translateY(-3px);
+        }
+
+        /* Glassmorphism card effect */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+            max-width: 600px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Button Styling */
+        .btn {
+            font-size: 18px;
+            padding: 12px 30px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            color: #f8f9fa;
+            background: #000;
+            padding: 15px 0;
+            font-size: 14px;
+            margin-top: 40px;
+        }
+
+        footer b {
+            color: #17a2b8;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .glass-card {
+                padding: 20px;
+            }
+            
+            .btn {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Background with gradient overlay -->
+<div class="background-overlay"></div>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <a class="navbar-brand" href="i-1.html"><i class="fas fa-home"></i> Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+            <li class="nav-item"><a class="nav-link" href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link" href="index.html"><i class="fas fa-headphones"></i> Hearing Test</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Main Content -->
+<div class="container mt-5 text-center">
+    <div class="card glass-card">
+        <h1>Welcome to the Advanced hearing health Tracker</h1>
+        <p>Use the navigation menu to access different pages and explore the features.</p>
+        <a href="index.html" class="btn btn-primary mt-3"><i class="fas fa-play"></i> Start Test</a>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2025 Hearing Test Website | Designed by <b>Sonic Spectrum Team</b></p>
+</footer>
+
+<!-- Scripts -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>
