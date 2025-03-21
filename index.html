@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Hearing Test / Audio Oscillator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <style>
+        /* Background styling with neon gradient */
+        body {
+            background: radial-gradient(circle, #1e3c72, #2a5298);
+            color: #ecf0f1;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #1e272e !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        .navbar-brand, .nav-link {
+            color: #f39c12 !important;
+            transition: 0.3s;
+        }
+
+        .navbar-brand:hover, .nav-link:hover {
+            color: #e67e22 !important;
+        }
+
+        /* Main container */
+        .container {
+            background: #0f1b3d;
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            max-width: 1100px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            color: #f39c12;
+            margin-bottom: 30px;
+        }
+
+        /* Box styling */
+        .box {
+            padding: 30px;
+            background: #1e272e;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+            transition: 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .box:hover {
+            transform: scale(1.05);
+        }
+
+        .box p {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #f1c40f;
+        }
+
+        /* Slider styling */
+        input[type="range"] {
+            width: 100%;
+            -webkit-appearance: none;
+            height: 8px;
+            background: #3498db;
+            border-radius: 5px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #f39c12;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 20px #f1c40f;
+        }
+
+        /* Button styling */
+        .btn {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 30px;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+        }
+
+        .waveform-btn, .channel-btn {
+            width: 160px;
+            transition: 0.3s;
+            border: 2px solid transparent;
+            color: #fff;
+        }
+
+        .waveform-btn.active, .channel-btn.active {
+            background: #f39c12;
+            color: #fff;
+            border: 2px solid #e67e22;
+        }
+
+        /* Play and Stop buttons */
+        .btn-success {
+            background: #27ae60;
+            color: #fff;
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+            color: #fff;
+        }
+
+        /* Frequency display */
+        #Frequency_Display {
+            width: 100px;
+            text-align: center;
+            padding: 5px;
+            font-size: 1.2rem;
+            border: 2px solid #f39c12;
+            border-radius: 5px;
+            background: #fff;
+            color: #1e272e;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-sm navbar-dark">
+    <a class="navbar-brand" href="#">Hearing Test</a>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item"><a class="nav-link" href="location.html">Location</a></li>
+        <li class="nav-item"><a class="nav-link" href="chart.html">Chart</a></li>
+    </ul>
+</nav>
+
+<!-- Main container -->
+<div class="container">
+    <h2>Hearing Test</h2>
+
+    <!-- Waveform buttons -->
+    <div class="text-center">
+        <button class="btn btn-primary waveform-btn" onclick="setWaveform('sine')">Sine</button>
+        <button class="btn btn-warning waveform-btn" onclick="setWaveform('square')">Square</button>
+        <button class="btn btn-success waveform-btn" onclick="setWaveform('triangle')">Triangle</button>
+        <button class="btn btn-danger waveform-btn" onclick="setWaveform('sawtooth')">Sawtooth</button>
+    </div>
+
+    <!-- Channel buttons -->
+    <div class="text-center mt-4">
+        <button class="btn btn-info channel-btn" onclick="setChannel('left')">Left</button>
+        <button class="btn btn-secondary channel-btn" onclick="setChannel('both')">Both</button>
+        <button class="btn btn-info channel-btn" onclick="setChannel('right')">Right</button>
+    </div>
+
+    <!-- Frequency Control -->
+    <div class="box text-center">
+        <p>Frequency</p>
+        <input type="text" id="Frequency_Display" value="200" readonly /> Hz
+        <input type="range" min="20" max="20000" value="200" id="Frequency_Slider" oninput="updateFrequency()">
+    </div>
+
+    <!-- Panning Control -->
+    <div class="box text-center">
+        <p>Panning</p>
+        <input type="range" min="-1" max="1" step="0.1" value="0" id="Panning_Slider">
+    </div>
+
+    <!-- Volume Control -->
+    <div class="box text-center">
+        <p>Volume</p>
+        <input type="range" min="0" max="1" step="0.01" value="0.5" id="Volume_Slider">
+    </div>
+
+    <!-- Play/Stop -->
+    <div class="text-center">
+        <button class="btn btn-success" onclick="Play_Button()">Play</button>
+        <button class="btn btn-danger" onclick="Stop_Button()">Stop</button>
+    </div>
+</div>
+
+<script>
+    let audioContext, oscillator, gainNode, panner;
+    let waveform = 'sine';
+    let channel = 'both';
+
+    function Play_Button() {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        oscillator = audioContext.createOscillator();
+        gainNode = audioContext.createGain();
+        panner = audioContext.createStereoPanner();
+
+        oscillator.type = waveform;
+        panner.pan.value = channel === 'left' ? -1 : channel === 'right' ? 1 : 0;
+
+        oscillator.frequency.value = document.getElementById('Frequency_Slider').value;
+
+        oscillator.connect(gainNode).connect(panner).connect(audioContext.destination);
+        oscillator.start();
+    }
+
+    function Stop_Button() {
+        oscillator.stop();
+    }
+
+    function setWaveform(type) {
+        waveform = type;
+    }
+
+    function setChannel(side) {
+        channel = side;
+    }
+
+    function updateFrequency() {
+        document.getElementById('Frequency_Display').value = document.getElementById('Frequency_Slider').value;
+    }
+</script>
+
+</body>
+</html>
