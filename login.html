@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Background with gradient overlay */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: url('er.jpg') no-repeat center center/cover;
+            position: relative;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        .background-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4));
+            z-index: -1;
+        }
+
+        /* Glassmorphism card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            padding: 50px;
+            max-width: 450px;
+            margin: 10% auto;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        /* Form fields */
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-control {
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 16px;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 10px #17a2b8;
+        }
+
+        /* Buttons */
+        .btn {
+            font-size: 18px;
+            padding: 12px 30px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-primary {
+            background: #17a2b8;
+            border: none;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            border: none;
+        }
+
+        .btn-link {
+            color: #f8f9fa;
+        }
+
+        .btn-link:hover {
+            color: #17a2b8;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            color: #f8f9fa;
+            background: #000;
+            padding: 15px 0;
+            font-size: 14px;
+            margin-top: 40px;
+        }
+
+        footer b {
+            color: #17a2b8;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .glass-card {
+                padding: 30px;
+            }
+
+            h2 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Background with gradient overlay -->
+<div class="background-overlay"></div>
+
+<!-- Login Form -->
+<div class="glass-card">
+    <h2><i class="fas fa-user-lock"></i> Login</h2>
+    
+    <form id="loginForm">
+        <div class="form-group">
+            <label><i class="fas fa-envelope"></i> Email:</label>
+            <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+            <label><i class="fas fa-key"></i> Password:</label>
+            <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+        </div>
+        <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Login</button>
+        <a href="reg.html" class="btn btn-link"><i class="fas fa-user-plus"></i> Register</a>
+        <a href="i-1.html" class="btn btn-secondary"><i class="fas fa-home"></i> Home</a>
+    </form>
+</div>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2025 Hearing Test Website | Designed by <b>Sonic Spectrum Team</b></p>
+</footer>
+
+<!-- JavaScript -->
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        // Get and sanitize input values
+        const email = document.getElementById('email').value.trim().toLowerCase();
+        const password = document.getElementById('password').value.trim();
+
+        // Retrieve stored credentials
+        const storedEmail = localStorage.getItem('email') ? localStorage.getItem('email').toLowerCase() : '';
+        const storedPassword = localStorage.getItem('password') || '';
+
+        // Validate credentials
+        if (email === storedEmail && password === storedPassword) {
+            alert('✅ Login successful!');
+            window.location.href = 'dashboard.html';  // Redirect on successful login
+        } else {
+            alert('❌ Invalid credentials. Please try again.');
+        }
+    });
+</script>
+
+</body>
+</html>
